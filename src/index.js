@@ -17,6 +17,7 @@ root.render(
       <div className="container">
         <Glory />
         <Weather />
+        <Weather defaultCity = "Dnipro|" />
         <Date />
         <Forecast />
         <Footer />

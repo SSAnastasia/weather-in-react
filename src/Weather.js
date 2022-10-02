@@ -1,95 +1,54 @@
 import React, { useState } from "react";
 import axios from "axios";
+import ShowWeather from "./ShowWeather";
 import "./styles.css";
 
-export default function SearchEngine() {
-  let [city, setcity] = useState("");
-  let [load, setLoad] = useState(false);
-  
- 
-  function show(event) {
-    event.preventDefault();
-    setcity(event.target.value);
-  }
- 
+export default function Weather(props){
+  const [weatherData, setWeatherData] = useState({ready:false});
+  const [city, setCity] = useState(props.defaultCity);
 
-  let [temperature, setTemperature] = useState(null);
-  let [description, setDescription] = useState(null);
-  let [humidity, setHumidity] = useState(null);
-  let [wind, setWind] = useState(null);
-  let [icon, setIcon] = useState(null);
-
-  function showTemperature(response) {
-    setLoad(true);
-    setTemperature(response.data.main.temp);
+  function handleResponse(response){
+    setWeatherData({
+      ready:true,
+      coordinates: response.data.coord,
+      temperature:response.data.main.temp,
+      humidity: response.data.main.humidity,
+      date:new Date(response.data.dt * 1000),
+      description: response.data.weather[0].description,
+      icon:response.data.weather[0].icon,
+      wind:response.data.wind.speed,
+      city:response.data.name,
+    });
   }
 
-  function showDescription(response) {
-    setLoad(true);
-    setDescription(response.data.weather[0].description);
-  }
-  function showHumidity(response) {
-    setLoad(true);
-    setHumidity(response.data.main.humidity);
-  }
-  function showWind(response) {
-    setLoad(true);
-    setWind(response.data.wind.speed);
-  }
-  function showIcon(response) {
-    setLoad(true);
-    setIcon(
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
-  }
-  
-  function handleSubmit(event) {
-    event.preventDefault();
-    let apikey = "8fa8d64086e29f081d52f48a507241e6";
-    let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`;
-    axios.get(apiurl).then(showTemperature);
-    axios.get(apiurl).then(showDescription);
-    axios.get(apiurl).then(showHumidity);
-    axios.get(apiurl).then(showWind);
-    axios.get(apiurl).then(showIcon);
-  }
 
-  let form = (
-    <div className="Search">
-    <form class="d-flex" role="search" onSubmit={handleSubmit}>
-      <input
-        class="form-control me-2"
-        type="search"
-        placeholder="Search city"
-        aria-label="Search"
-        autofocus="on"
-        autocomplete="off"
-        id="enter-city"
-        onChange={show} />
-      
-      <button class="btn btn-outline-success" type="submit" id="searching">
-        Search
-      </button>
-      <input type="submit" value="My location" id="location-button" />
-    </form>
-  </div>
-  );
-  if (load) {
-    return (
-      <div>
-        {form}
-        <ul>
-          <li>Temperature: {Math.round(temperature)}°C</li>
-          <li>Description: {description}</li>
-          <li>Humidity: {humidity}%</li>
-          <li>Wind: {Math.round(wind)}km/h</li>
-          <li>
-            <img src={icon} alt="" />
-          </li>
-        </ul>
+
+    function Submit(event){
+      event.preventDefault();
+      search();
+    }
+    function cityChange(event){
+      setCity(event.target.value);
+    }
+    
+    function search(){
+      const apiKey = "8fa8d64086e29f081d52f48a507241e6";
+      let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+      axios.get(apiUrl).then(handleResponse);
+    }
+
+    if (weatherData.ready) {
+      return (
+        <div>
+        <form onSubmit={Submit}>
+        <input type="search" placeholder="Type a city... " onChange={cityChange} />
+        <input type="submit" value="Search" />
+      </form>
+      <ShowWeather data = {weatherData}/>
       </div>
-    );
-  } else {
-    return form;
-  }
+      );
+    }else{
+    search()
+    return "Loading...";
+    }
 }
