@@ -37,12 +37,21 @@ export default function Weather(props){
       axios.get(apiUrl).then(handleResponse);
     }
 
+   
+
     if (weatherData.ready) {
       return (
         <div>
-        <form onSubmit={Submit}>
-        <input type="search" placeholder="Type a city... " onChange={cityChange} />
-        <input type="submit" value="Search" />
+        <form class = "d-flex" 
+        role = "search"  
+        onSubmit={Submit}>
+        <input class = "form-control me-2"
+        type="search" 
+        placeholder="Type a city... " 
+        onChange={cityChange} />
+        <button class = "btn btn-outline-success" type="submit" id="searching">
+          Search
+          </button>
       </form>
       <ShowWeather data = {weatherData}/>
       </div>

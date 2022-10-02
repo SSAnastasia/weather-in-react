@@ -1,6 +1,8 @@
 .weather-app {
   background: linear-gradient(to top, #9795f0 0%, #fbc8d4 100%);
   border-radius: 10px;
+  max-width: 750px;
+  margin: 30px auto;
 }
 
 .current {
@@ -33,12 +35,6 @@ ul {
   background: transparent;
 }
 
-#location-button {
-  background: rgb(66, 99, 161);
-  color: rgb(231, 237, 243);
-  border-color: rgb(92, 147, 209);
-  border-radius: 10px;
-}
 
 .days,
 .weeks {
@@ -70,4 +66,19 @@ ul {
 }
 li{
 text-decoration: underline;
+font-style: oblique;
+font-weight: bolder;
+}
+h2,p,h3,h4{
+  color: white;
+  font-style: italic;
+}
+h3{
+  font-size: xx-large;
+}
+p{
+  font-size: xx-large;
+}
+.unit{
+  font-size:smaller;
 }

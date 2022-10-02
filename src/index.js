@@ -6,7 +6,6 @@ import Glory from "./Glory";
 import Forecast from "./Forecast";
 import Footer from "./Footer";
 import Weather from "./Weather";
-import Date from "./Date";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
@@ -16,9 +15,7 @@ root.render(
     <div className="weather-app">
       <div className="container">
         <Glory />
-        <Weather />
-        <Weather defaultCity = "Dnipro|" />
-        <Date />
+        <Weather defaultCity = "Dnipro" />    
         <Forecast />
         <Footer />
       </div>
