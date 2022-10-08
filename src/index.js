@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.css";
 import "./styles.css";
 import Glory from "./Glory";
-import Forecast from "./Forecast";
 import Footer from "./Footer";
 import Weather from "./Weather";
 
@@ -16,7 +15,6 @@ root.render(
       <div className="container">
         <Glory />
         <Weather defaultCity = "Dnipro" />    
-        <Forecast />
         <Footer />
       </div>
     </div>

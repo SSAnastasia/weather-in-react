@@ -50,26 +50,24 @@ ul {
   display: flex;
   text-align: center;
 }
-#card1,
-#card2,
-#card3,
-#card4,
-#card5 {
-  background: radial-gradient(
-    circle at 10% 20%,
-    rgb(137, 210, 253) 0%,
-    rgb(255, 241, 188) 90%
-  );
-  padding:30px;
-  border-radius: 10px;
-  
-}
+
+ .Forecast-temp-min{
+  color:rgb(85, 80, 80);
+ }
+ .Forecast-day{
+  font-weight: bolder;
+  font-style: italic;
+ }
+ .Forecast-temperature{
+  font-size: larger;
+  font-weight: 600;
+ }
 li{
 text-decoration: underline;
 font-style: oblique;
 font-weight: bolder;
 }
-h2,p,h3,h4{
+h2,p,h3{
   color: white;
   font-style: italic;
 }
