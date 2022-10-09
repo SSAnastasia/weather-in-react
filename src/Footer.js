@@ -11,6 +11,7 @@ export default function Footer(){
         class = "code"> Open-source code</a>
            
     </h6>
+    
     </span>
 </footer>
 </div>
